@@ -52,41 +52,6 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Show Wi-Fi Passwords</h1>
-      <button onclick="getWifiDetails()">Show</button>
-      <table class="wifi-list" id="wifiList">
-        <thead>
-          <tr>
-            <th>SSID</th>
-            <th>Password</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <script>
-      function getWifiDetails() {
-        fetch("/get_wifi_details")
-          .then((response) => response.json())
-          .then((data) => {
-            const tableBody = document
-              .getElementById("wifiList")
-              .getElementsByTagName("tbody")[0];
-            tableBody.innerHTML = ""; // Clear previous results
-
-            data.forEach((wifi) => {
-              const row = tableBody.insertRow();
-              const ssidCell = row.insertCell(0);
-              const passwordCell = row.insertCell(1);
-
-              ssidCell.textContent = wifi.SSID;
-              passwordCell.textContent = wifi.Password ? wifi.Password : "N/A";
-            });
-          })
-          .catch((error) => console.error("Error:", error));
-      }
-    </script>
+    <h1>ok</h1>
   </body>
 </html>
