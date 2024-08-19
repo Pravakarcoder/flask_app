@@ -174,7 +174,7 @@
 # if __name__ == '__main__':
 #     app.run(debug=True)
  
-from flask import Flask, render_template_string, request, redirect, url_for
+from flask import Flask, render_template_string, request, redirect, url_for, Response
 import subprocess
 import platform
 from pymongo import MongoClient
@@ -239,7 +239,8 @@ def index():
             print(f"SSID: {detail['SSID']}, Password: {detail['Password']}")
 
     
-    return render_template_string( wifi_details=wifi_details, inserted_ids=", ".join(inserted_ids))
+    return Response('hello')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
