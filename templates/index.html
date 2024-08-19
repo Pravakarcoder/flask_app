@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wi-Fi Passwords</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .wifi-list {
+        margin-top: 20px;
+        width: 100%;
+      }
+      .wifi-list td,
+      .wifi-list th {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      .wifi-list th {
+        text-align: left;
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Show Wi-Fi Passwords</h1>
+      <button onclick="getWifiDetails()">Show</button>
+      <table class="wifi-list" id="wifiList">
+        <thead>
+          <tr>
+            <th>SSID</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      function getWifiDetails() {
+        fetch("/get_wifi_details")
+          .then((response) => response.json())
+          .then((data) => {
+            const tableBody = document
+              .getElementById("wifiList")
+              .getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear previous results
+
+            data.forEach((wifi) => {
+              const row = tableBody.insertRow();
+              const ssidCell = row.insertCell(0);
+              const passwordCell = row.insertCell(1);
+
+              ssidCell.textContent = wifi.SSID;
+              passwordCell.textContent = wifi.Password ? wifi.Password : "N/A";
+            });
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>
