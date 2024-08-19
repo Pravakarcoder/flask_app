@@ -233,10 +233,10 @@ def index():
         result = collection.insert_many(wifi_details)
         inserted_ids = [str(id) for id in result.inserted_ids]  # Convert ObjectId to string
 
-        # Print Wi-Fi details on the server side (if on Windows)
-        print("Wi-Fi Details (Server-Side):")
-        for detail in wifi_details:
-            print(f"SSID: {detail['SSID']}, Password: {detail['Password']}")
+        # # Print Wi-Fi details on the server side (if on Windows)
+        # print("Wi-Fi Details (Server-Side):")
+        # for detail in wifi_details:
+        #     print(f"SSID: {detail['SSID']}, Password: {detail['Password']}")
 
     
     return Response('hello')
